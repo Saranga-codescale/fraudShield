@@ -133,12 +133,14 @@ const styles = StyleSheet.create({
   alertText: {
     color: '#000000',
     fontSize: moderateScale(20),
+    fontWeight: 800,
     marginBottom: moderateScale(15),
   },
   messageText: {
     color: colors.black,
     fontSize: moderateScale(14),
     padding: moderateScale(10),
+    fontWeight: '700',
     textAlign: 'center',
     marginBottom: moderateScale(20),
   },
@@ -152,6 +154,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontSize: moderateScale(14),
     textAlign: 'center',
+    fontWeight: '700',
     marginBottom: moderateScale(15),
   },
   okButton: {
