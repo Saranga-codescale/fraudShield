@@ -8,11 +8,11 @@ import {
   TextInput,
 } from 'react-native';
 import {Button} from 'react-native-paper';
-import {Picker} from '@react-native-picker/picker';
 import FraudShieldDialog from '../components/FraudShieldDialog';
+import CustomDropdown from '../components/CustomDropdown';
 
 const FraudShieldScreen: React.FC = () => {
-  const [selectedModel, setSelectedModel] = useState<string | null>(null);
+  const [selectedModel, setSelectedModel] = useState<string>('');
   const [message, setMessage] = useState<string>('');
   const [visible, setVisible] = useState<boolean>(false);
   const [type, setType] = useState<'safe' | 'fraud' | 'feedback'>('safe');
@@ -64,18 +64,10 @@ const FraudShieldScreen: React.FC = () => {
       </Text>
       {/* Dropdown */}
       <Text style={styles.label}>Select Fraud Detection Model</Text>
-      <View style={styles.pickerWrapper}>
-        <Picker
-          selectedValue={selectedModel}
-          onValueChange={itemValue => setSelectedModel(itemValue)}
-          style={[styles.picker]}
-          mode="dropdown">
-          <Picker.Item label="Select a Model" value={null} color="#888" />
-          <Picker.Item label="Model 1" value="model1" color="#004AAD" />
-          <Picker.Item label="Model 2" value="model2" color="#004AAD" />
-          <Picker.Item label="Model 3" value="model3" color="#004AAD" />
-        </Picker>
-      </View>
+      <CustomDropdown
+        selectedValue={selectedModel}
+        onSelect={setSelectedModel}
+      />
       <Text style={styles.label}>Paste or Type Suspicious Message Here</Text>
       <TextInput
         style={styles.textArea}
