@@ -74,24 +74,47 @@ const FraudShieldDialog: React.FC<FraudShieldDialogProps> = ({
           )}
           <Text style={styles.messageText}>{description}</Text>
 
-          <View
-            style={{flexDirection: 'row', justifyContent: 'center', gap: 20}}>
-            <Text style={styles.feedbackText}>How did we do?</Text>
-            <Image
-              source={require('../assets/icon-like.png')}
-              style={styles.feedbackImage}
-              resizeMode="contain"
-            />
-            <Image
-              source={require('../assets/icon-dislike.png')}
-              style={styles.feedbackImage}
-              resizeMode="contain"
-            />
-          </View>
+          {(type === 'safe' || type === 'fraud') && (
+            <View
+              style={{flexDirection: 'row', justifyContent: 'center', gap: 20}}>
+              <Text style={styles.feedbackText}>How did we do?</Text>
+              <Image
+                source={require('../assets/icon-like.png')}
+                style={styles.feedbackImage}
+                resizeMode="contain"
+              />
+              <Image
+                source={require('../assets/icon-dislike.png')}
+                style={styles.feedbackImage}
+                resizeMode="contain"
+              />
+            </View>
+          )}
 
-          <TouchableOpacity style={styles.okButton} onPress={onClose}>
-            <Text style={styles.okButtonText}>Okay</Text>
-          </TouchableOpacity>
+          {type === 'feedback' ? (
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'center',
+                gap: 20,
+                width: '100%',
+              }}>
+              <TouchableOpacity
+                style={[styles.okButton, {backgroundColor: '#CD2F2E'}]}
+                onPress={onClose}>
+                <Text style={styles.okButtonText}>No, Skip</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.okButton, {backgroundColor: '#039855'}]}
+                onPress={onClose}>
+                <Text style={styles.okButtonText}>Yes, Use it!</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <TouchableOpacity style={styles.okButton} onPress={onClose}>
+              <Text style={styles.okButtonText}>Okay</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     </Modal>
@@ -167,6 +190,7 @@ const styles = StyleSheet.create({
   okButtonText: {
     color: '#ffffff',
     fontSize: moderateScale(14),
+    fontWeight: 800,
     textAlign: 'center',
   },
 });
