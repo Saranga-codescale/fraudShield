@@ -18,6 +18,7 @@ const FraudShieldScreen: React.FC = () => {
   const [type, setType] = useState<'safe' | 'fraud' | 'feedback'>('safe');
   const [title, setTitle] = useState<string>('No title');
   const [description, setDescription] = useState<string>('No description');
+  const [feedbackVisible, setFeedbackVisible] = useState<boolean>(false);
 
   const handlePressButton = () => {
     if (message === 'okay') {
@@ -35,6 +36,11 @@ const FraudShieldScreen: React.FC = () => {
       );
       setVisible(true);
     }
+  };
+
+  const handleClose = () => {
+    setVisible(false);
+    setFeedbackVisible(true);
   };
 
   return (
@@ -90,9 +96,18 @@ const FraudShieldScreen: React.FC = () => {
       <FraudShieldDialog
         type={type}
         visible={visible}
-        onClose={() => setVisible(false)}
+        onClose={handleClose}
         title={title}
         description={description}
+      />
+      <FraudShieldDialog
+        type={'feedback'}
+        visible={feedbackVisible}
+        onClose={() => setFeedbackVisible(false)}
+        title={'Help Improve FraudShield!'}
+        description={
+          'Would you like to allow us to use this message to improve our fraud detection system? Your data will be anonymized and used only for training purposes.'
+        }
       />
     </ScrollView>
   );
