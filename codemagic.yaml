@@ -8,6 +8,12 @@ workflows:
       vars:
         CM_KEYSTORE_PATH: './android/app/my-release-key.keystore'
     scripts:
+      - name: Install yarn dependencies
+        script: |
+          yarn
+      - name: Set Android SDK location
+        script: |
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"
       - name: Decode keystore
         script: |
           echo $CM_KEYSTORE | base64 --decode > my-release-key.keystore
