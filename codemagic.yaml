@@ -6,11 +6,11 @@ workflows:
       groups:
         - keystore
       vars:
-        CM_KEYSTORE_PATH: 'my-release-key.keystore'
+        CM_KEYSTORE_PATH: './android/app/my-release-key.keystore'
     scripts:
       - name: Decode keystore
         script: |
-          echo $CM_KEYSTORE | base64 --decode > $CM_KEYSTORE_PATH
+          echo $CM_KEYSTORE | base64 --decode > my-release-key.keystore
       - name: Build Android release
         script: |
           cd android
